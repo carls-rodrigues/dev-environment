@@ -10,43 +10,12 @@
       tags:
         - node
         - zsh
+        - rust
   tasks:
-    - name: Install zsh
-      apt:
-        name: zsh
-        state: present
-      tags: zsh
+    - include:
+      - node
+      - zsh
+      - rust
 
-    - name: Change shell
-      shell: chsh -s `which zsh`
-      tags: zsh
-
-    - name: Install oh-my-zsh
-      shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-      tags: zsh
-
-    - name: Install zsh plugin autosuggestions
-      ansible.builtin.git:
-        repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
-        dest: ~/.oh-my-zsh/plugins/zsh-autosuggestions
-      tags: zsh
-
-    - name: update zshrc
-      shell: sed -i 's/(git/(git zsh-autosuggestions' ~/.zshrc'
-      tags: zsh
-
-    - name: get nvm
-      shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-      tags: node
-
-    - name: install node lts
-      shell: nvm install --lts
-      tags: node
-
-    - name: install yarn
-      shell: npm install -g yarn
-      tags: node
     
-    - name: install rust
-      shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-      tags: rust
+
