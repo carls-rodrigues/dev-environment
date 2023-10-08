@@ -12,10 +12,9 @@
         - zsh
         - rust
   tasks:
-    - include:
-      - node
-      - zsh
-      - rust
+    - include: tasks/zsh-setup.yml
+    - include: tasks/node-setup.yml
+    - include: tasks/rust-setup.yml
 
     
 
