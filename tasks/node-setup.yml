@@ -1,4 +1,4 @@
 - name: Install node and set version
-  shell: "source /home/cerf/.nvm/nvm.sh && nvm install --lts" 
+  shell: "source /home/cerfdotdev/.nvm/nvm.sh && nvm install --lts" 
   args:
     executable: /bin/bash

@@ -15,9 +15,7 @@
     - docker
 
 - name: Install prerequisites and set up Docker repository
-  hosts: all
-  become: true
-  tasks:
+  block:
     - name: Update apt cache
       apt:
         update_cache: yes
@@ -51,11 +49,13 @@
         group: root
 
     - name: Add Docker repository to Apt sources
+    
       lineinfile:
         path: /etc/apt/sources.list.d/docker.list
-        line: "deb [arch={{ ansible_architecture }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+        line: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu mantic stable"
         create: yes
-      notify: Update apt cache
+        state: present
+        
 
     - name: Install Docker packages
       apt:
@@ -66,11 +66,11 @@
           - docker-buildx-plugin
           - docker-compose-plugin
         state: present
-
-- name: Additional Docker installation using apt-get
-  hosts: all
   become: true
-  tasks:
+  
+- name: Additional Docker installation using apt-get
+  block:
     - name: Install Docker packages using apt-get
       shell: >
         sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  become: true

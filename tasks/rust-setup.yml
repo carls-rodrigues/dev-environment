@@ -1,7 +1,5 @@
 - name: Install Rust
-  hosts: all
-  become: true
-  tasks:
+  block:
     - name: Install Rustup prerequisites (ca-certificates, curl)
       apt:
         name:
@@ -15,9 +13,3 @@
       args:
         creates: $HOME/.cargo/bin/rustup
 
-    - name: Install cargo-watch and rustfmt
-      shell: >
-        cargo install cargo-watch rustfmt
-      args:
-        executable: /bin/bash
-        creates: $HOME/.cargo/bin/cargo-watch
