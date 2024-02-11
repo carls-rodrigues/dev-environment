@@ -14,16 +14,18 @@
       - install
       - core
   tasks:
-    #- import_tasks: tasks/ssh.yml
-    #- import_tasks: tasks/git-setup.yml
-    #- import_tasks: tasks/core-setup.yml
-    #- import_tasks: tasks/nvm-setup.yml
-    #- import_tasks: tasks/node-setup.yml
+    - import_tasks: tasks/ssh.yml
+    - import_tasks: tasks/git-setup.yml
+    - import_tasks: tasks/core-setup.yml
+    - import_tasks: tasks/nvm-setup.yml
+    - import_tasks: tasks/node-setup.yml
+    - import_tasks: tasks/zsh-setup.yml
+    - import_tasks: tasks/nvim-setup.yml
+    - import_tasks: tasks/docker-setup.yml
+    - import_tasks: taskts/rust-setup.yml
     # - import_tasks: tasks/npm-packages.yml
-    #- import_tasks: tasks/zsh-setup.yml
     # - import_tasks: tasks/slack-setup.yml
     # - import_tasks: tasks/personal-projects.yml
-    - import_tasks: tasks/nvim-setup.yml
     # - import_tasks: tasks/brave.yml
     # - import_tasks: tasks/debugger.yml
     # - import_tasks: tasks/dotfiles.yml

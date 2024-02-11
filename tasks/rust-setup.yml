@@ -1,0 +1,23 @@
+- name: Install Rust
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Rustup prerequisites (ca-certificates, curl)
+      apt:
+        name:
+          - ca-certificates
+          - curl
+        state: present
+
+    - name: Download and install Rust using rustup
+      shell: >
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      args:
+        creates: $HOME/.cargo/bin/rustup
+
+    - name: Install cargo-watch and rustfmt
+      shell: >
+        cargo install cargo-watch rustfmt
+      args:
+        executable: /bin/bash
+        creates: $HOME/.cargo/bin/cargo-watch
